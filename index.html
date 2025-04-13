@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid-ul-Azha Mubarak</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Amiri', serif;
+            background: linear-gradient(135deg, #0a3a40, #1a5f6b);
+            color: #fff;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 90%;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 2s ease-in-out;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            color: #f9d423;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+        
+        .arabic-text {
+            font-family: 'Noto Naskh Arabic', serif;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #f9d423;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+        }
+        
+        .message {
+            font-size: 1.8em;
+            margin: 25px 0;
+            line-height: 1.6;
+        }
+        
+        .input-container {
+            margin: 30px auto;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .input-box {
+            width: 100%;
+            padding: 20px 25px;
+            border: 2px solid #f9d423;
+            border-radius: 12px;
+            font-size: 1.3em;
+            background: rgba(255, 255, 255, 0.9);
+            font-family: 'Amiri', serif;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: #333;
+        }
+        
+        .input-box:focus {
+            outline: none;
+            box-shadow: 0 0 20px rgba(249, 212, 35, 0.7);
+            transform: scale(1.02);
+        }
+        
+        .input-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1a5f6b;
+            font-size: 1.5em;
+        }
+        
+        .submit-btn {
+            margin: 20px auto;
+            padding: 15px 40px;
+            background: linear-gradient(to right, #f9d423, #e67e22);
+            color: #333;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Amiri', serif;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: none;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .holy-image {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 15px;
+            margin: 25px auto;
+            display: block;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border: 3px solid rgba(249, 212, 35, 0.5);
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        
+        .holy-image.loaded {
+            opacity: 1;
+        }
+        
+        .eid-mubarak {
+            font-size: 3em;
+            color: #f9d423;
+            margin: 25px 0;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            animation: glow 2s infinite alternate;
+        }
+        
+        .signature {
+            font-style: italic;
+            margin-top: 15px;
+            color: #f9d423;
+            font-size: 1.5em;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+        
+        .family-signature {
+            font-style: italic;
+            margin-top: 5px;
+            color: #f9d423;
+            font-size: 1.2em;
+        }
+        
+        .floating-moon {
+            position: absolute;
+            top: 10%;
+            right: 10%;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #f9f3a1 30%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(1px);
+            z-index: 1;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .floating-star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            filter: blur(0.5px);
+            z-index: 1;
+            animation: twinkle 4s infinite alternate;
+        }
+        
+        .floating-lantern {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            background: radial-gradient(ellipse at center, #f9d423 20%, #e67e22 70%, transparent 90%);
+            border-radius: 50% 50% 10px 10px;
+            z-index: 1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #f9d423, 0 0 20px #f9d423; }
+            to { text-shadow: 0 0 15px #f9d423, 0 0 30px #f9d423, 0 0 40px #f9d423; }
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f9d423;
+            opacity: 0;
+            z-index: 10;
+            animation: confettiFall 5s linear forwards;
+        }
+        
+        @keyframes confettiFall {
+            0% { 
+                transform: translateY(-100px) rotate(0deg); 
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(100vh) rotate(360deg); 
+                opacity: 0;
+            }
+        }
+        
+        .mosque-silhouette {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%23f9d423"></path><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="%23f9d423"></path><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23f9d423"></path></svg>');
+            background-repeat: repeat-x;
+            background-size: contain;
+            opacity: 0.3;
+            z-index: 1;
+        }
+        
+        .backup-image {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating decorative elements -->
+    <div class="floating-moon"></div>
+    <div class="mosque-silhouette"></div>
+    
+    <!-- Container for all content -->
+    <div class="container">
+        <h1 id="greeting">Aslam o Alaikum</h1>
+        <div class="arabic-text" id="arabicGreeting">ٱلسَّلَامُ عَلَيْكُمْ</div>
+        
+        <div id="inputContainer" class="input-container">
+            <input 
+                type="text" 
+                id="nameInput" 
+                class="input-box" 
+                placeholder="Please enter your name..." 
+            >
+            <i class="fas fa-user-edit input-icon"></i>
+            <button class="submit-btn" id="submitBtn">Submit</button>
+        </div>
+        
+        <div id="rewardMessage" style="display: none;">
+            <p class="message">Dear <span id="userName">User</span>, please wait for your reward!</p>
+            <img src="https://i.imgur.com/JQZwW7a.jpg" alt="Kaaba & Masjid-e-Nabvi" class="holy-image" id="holyImage" onerror="this.src='https://i.imgur.com/5XZwqQp.jpg'">
+        </div>
+        
+        <div id="eidMessage" style="display: none;">
+            <h2 class="eid-mubarak">Eid-ul-Azha Mubarak!</h2>
+            <p class="message"><span id="userName2">User</span>, may Allah accept your sacrifices and bless you with happiness.</p>
+            <img src="https://img.freepik.com/premium-vector/eid-al-adha-dekstop-background-with-illustration-cartoon_279584-85.jpg" alt="Eid-ul-Azha" class="holy-image" id="eidImage" onerror="this.src='https://i.imgur.com/5XZwqQp.jpg'">
+            <p class="signature">- Syed Muhammad Atta Farid Shah</p>
+            <p class="family-signature">And his whole family</p>
+        </div>
+    </div>
+
+    <!-- Backup images -->
+    <div class="backup-image">
+        <img src="https://i.imgur.com/5XZwqQp.jpg" alt="Backup Eid image">
+    </div>
+
+    <script>
+        // Create floating stars
+        function createStars() {
+            const starsCount = 50;
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('floating-star');
+                
+                const size = Math.random() * 2 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 4}s`;
+                
+                document.body.appendChild(star);
+            }
+        }
+        
+        // Create lanterns
+        function createLanterns() {
+            const lanternCount = 3;
+            for (let i = 0; i < lanternCount; i++) {
+                const lantern = document.createElement('div');
+                lantern.classList.add('floating-lantern');
+                lantern.style.left = `${Math.random() * 100}%`;
+                lantern.style.top = `${Math.random() * 30 + 10}%`;
+                lantern.style.animationDelay = `${Math.random() * 3}s`;
+                document.body.appendChild(lantern);
+            }
+        }
+        
+        // Create confetti effect
+        function createConfetti() {
+            const confettiCount = 100;
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                const size = Math.random() * 10 + 5;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                const colors = ['#f9d423', '#e67e22', '#fff', '#f1c40f'];
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = `${Math.random() * 100}vw`;
+                confetti.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                confetti.style.animationDelay = `${Math.random() * 2}s`;
+                document.body.appendChild(confetti);
+            }
+        }
+        
+        // Initialize decorative elements
+        createStars();
+        createLanterns();
+        
+        // Initial Greeting
+        setTimeout(() => {
+            document.getElementById("inputContainer").style.display = "block";
+            document.getElementById("greeting").innerHTML = "Welcome Dear Guest!";
+            document.getElementById("arabicGreeting").innerHTML = "مرحباً بكم";
+            document.getElementById("submitBtn").style.display = "block";
+            
+            setTimeout(() => {
+                document.getElementById("nameInput").focus();
+            }, 300);
+        }, 5000);
+        
+        // Handle Name Submission
+        document.getElementById("submitBtn").addEventListener("click", function() {
+            submitName();
+        });
+        
+        document.getElementById("nameInput").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                submitName();
+            }
+        });
+        
+        function submitName() {
+            const userName = document.getElementById("nameInput").value.trim();
+            if (userName) {
+                processNameSubmission(userName);
+            } else {
+                const inputBox = document.getElementById("nameInput");
+                inputBox.style.animation = 'none';
+                void inputBox.offsetWidth;
+                inputBox.style.animation = 'shake 0.5s';
+            }
+        }
+        
+        function processNameSubmission(userName) {
+            document.getElementById("inputContainer").style.display = "none";
+            document.getElementById("greeting").innerHTML = `Aslam o Alaikum, ${userName}!`;
+            document.getElementById("arabicGreeting").innerHTML = `ٱلسَّلَامُ عَلَيْكُمْ ${userName}`;
+            
+            document.getElementById("userName").textContent = userName;
+            document.getElementById("userName2").textContent = userName;
+            
+            document.getElementById("rewardMessage").style.display = "block";
+            
+            const holyImage = document.getElementById("holyImage");
+            holyImage.onload = function() {
+                holyImage.classList.add('loaded');
+            };
+            holyImage.src = holyImage.getAttribute('src');
+            
+            setTimeout(() => {
+                document.getElementById("rewardMessage").style.display = "none";
+                document.getElementById("eidMessage").style.display = "block";
+                
+                const eidImage = document.getElementById("eidImage");
+                eidImage.onload = function() {
+                    eidImage.classList.add('loaded');
+                    createConfetti();
+                };
+                eidImage.src = eidImage.getAttribute('src');
+            }, 5000);
+        }
+        
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Check if images loaded successfully
+        window.addEventListener('load', function() {
+            const eidImage = document.getElementById("eidImage");
+            if (eidImage.naturalWidth === 0) {
+                eidImage.src = 'https://i.imgur.com/5XZwqQp.jpg';
+            }
+            
+            const holyImage = document.getElementById("holyImage");
+            if (holyImage.naturalWidth === 0) {
+                holyImage.src = 'https://i.imgur.com/5XZwqQp.jpg';
+            }
+        });
+    </script>
+</body>
+</html>
